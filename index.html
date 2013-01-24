@@ -26,6 +26,21 @@
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
+
+
+		<style>
+			.code-highlight {
+				opacity: 1 !important;
+			}
+			.code-highlight.visible {
+				background-color: rgba(0,0,0,0.2);
+			}
+
+			#constraint {
+				font-family: monospace;
+			}
+		</style>
+
 	</head>
 
 	<body>
@@ -40,6 +55,9 @@
 					<h3>Javascript Error Generator</h3>
 					<p>
 						<small>Daniel Connor - C00137906</small>
+					</p>
+					<p>
+						<small>IT Carlow - 25/01/2013</small>
 					</p>
 				</section>
 
@@ -96,8 +114,11 @@ function example(a) {
 						<h2>Type Errors</h2>
 						<p>TypeErrors are the most common type of error.</p>
 						<pre><code>
-var a;
-a();
+function example(callback) {
+	//do something
+
+	callback();
+}
 						</code></pre>
 					</section>
 
@@ -106,7 +127,7 @@ a();
 						<a href="http://www.typescriptlang.org/">TypeScript</a> - By Microsoft
 						<pre><code>
 function greeter(person: string) {
-    return "Hello, " + person;
+		return "Hello, " + person;
 }
 
 var user = "Jane User";
@@ -117,7 +138,7 @@ document.body.innerHTML = greeter(user);
 
 					<section>
 						<h3>Type Coercion</h3>
-						<p>Values must be coerced to perform operations on different types.</p>
+						<p>Values can be coerced to perform operations on different types.</p>
 						<pre><code>
 "1" + 2 + 3 = "123"
 "3" - 1 = 2
@@ -132,6 +153,26 @@ null == undefined
 						<p>
 							Execution of a program using symbolic values rather than real ones.
 						</p>
+					</section>
+
+					<section>
+						<h4>Constraint</h4>
+						<div id="constraint">none</div>
+						<pre><code>
+<span id="line1" class="fragment code-highlight">function example(a, b) {			</span>
+<span id="line2" class="fragment code-highlight">	if(a > 5 && b === a * a) {		</span>
+<span id="line3" class="fragment code-highlight">		a += 1;				</span>
+<span id="line4" class="fragment code-highlight">		if(a < 100) {			</span>
+<span id="line5" class="fragment code-highlight">			//do something		</span>
+		}
+		else {
+<span id="line6" class="fragment code-highlight">			// do something else 		</span>
+		}
+	}
+}
+
+<span id="invoke"></span>
+						</code></pre>
 					</section>
 
 					<section>
@@ -157,7 +198,7 @@ null == undefined
 					<h2>// TODO: Lots...</h2>
 					<ul>
 						<li>Figure out a way of representing object constraints.</li>
-						<li>Expand the subset of javscript.</li>
+						<li>Expand the subset of javascript.</li>
 						<li>Create a usable tool.</li>
 					</ul>
 				</section>
@@ -207,6 +248,35 @@ null == undefined
 				]
 			});
 
+
+			function updateState() {
+				var constraintDiv = document.getElementById("constraint"),
+					invoke = document.getElementById("invoke");
+				switch(event.fragment.id) {
+					case "line1":
+						constraintDiv.textContent = "none";
+						break;
+					case "line2":
+						constraintDiv.textContent = "a > 5 && b = a * a";
+						invoke.innerHTML = '<span id="invoke">example(<span class="number">50</span>, <span class="number">2505</span>);</span>'
+						break;
+					case "line2":
+						break;
+					case "line4":
+						constraintDiv.textContent = "a > 5 && a = b * b && a + 1 < 100";
+						break;
+					case "line5":
+						invoke.innerHTML = '<span id="invoke">example(<span class="number">58</span>, <span class="number">3369</span>);</span>'
+						break;
+					case "line6":
+						constraintDiv.textContent = "a > 5 && a = b * b && !(a + 1 < 100)";
+						invoke.innerHTML = '<span id="invoke">example(<span class="number">112</span>, <span class="number">12549</span>);</span>'
+						break;
+				}
+			}
+
+			Reveal.addEventListener('fragmentshown', updateState);
+			Reveal.addEventListener('fragmenthidden', updateState);
 		</script>
 
 	</body>
