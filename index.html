@@ -160,6 +160,7 @@ null == undefined
 						<div id="constraint">none</div>
 						<pre><code>
 <span id="line1" class="fragment code-highlight">function example(a, b) {			</span>
+<span class="fragment code-highlight">	// some code 				</span>
 <span id="line2" class="fragment code-highlight">	if(a > 5 && b === a * a) {		</span>
 <span id="line3" class="fragment code-highlight">		a += 1;				</span>
 <span id="line4" class="fragment code-highlight">		if(a < 100) {			</span>
@@ -169,10 +170,11 @@ null == undefined
 <span id="line6" class="fragment code-highlight">			// do something else 		</span>
 		}
 	}
+	if(b < 10000) {
+		// some code
+	}
 }
-
-<span id="invoke"></span>
-						</code></pre>
+<span id="invoke"></span></code></pre>
 					</section>
 
 					<section>
@@ -181,7 +183,7 @@ null == undefined
 							<li>Loops</li>
 							<li>Path explosion</li>
 							<li>Representation of multiple types</li>
-							<li>Strings</li>
+							<li>Strings and Arrays</li>
 						</ul>
 					</section>
 				</section>
@@ -255,18 +257,20 @@ null == undefined
 				switch(event.fragment.id) {
 					case "line1":
 						constraintDiv.textContent = "none";
+						invoke.innerHTML = '';
 						break;
 					case "line2":
 						constraintDiv.textContent = "a > 5 && b = a * a";
-						invoke.innerHTML = '<span id="invoke">example(<span class="number">50</span>, <span class="number">2505</span>);</span>'
+						invoke.innerHTML = '';
 						break;
-					case "line2":
+					case "line3":
+						invoke.innerHTML = '<span id="invoke">example(<span class="number">50</span>, <span class="number">2505</span>);</span>';
 						break;
 					case "line4":
 						constraintDiv.textContent = "a > 5 && a = b * b && a + 1 < 100";
 						break;
 					case "line5":
-						invoke.innerHTML = '<span id="invoke">example(<span class="number">58</span>, <span class="number">3369</span>);</span>'
+						invoke.innerHTML = '<span id="invoke">example(<span class="number">58</span>, <span class="number">3369</span>);</span>';
 						break;
 					case "line6":
 						constraintDiv.textContent = "a > 5 && a = b * b && !(a + 1 < 100)";
