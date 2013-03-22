@@ -78,7 +78,7 @@
 					<section>
 						<h2>Similar tools</h2>
 						<ul>
-							<li class="fragment">Static analysers such as <img width="90px" style="vertical-align:middle" src="img/jshint-blue.png"></li>
+							<li>Static analysers such as <img width="90px" style="vertical-align:middle" src="img/jshint-blue.png"></li>
 							<li class="fragment">Hand coded tests.</li>
 							<li class="fragment">Code coverage tools.</li>
 						</ul>
@@ -194,7 +194,7 @@ function example(obj) {
 		if(obj.prop == null) {
 			obj.prop = {};
 		}
-		obj.prop.a = 10;
+		obj.prop.value = 10;
 	}
 }
 						</pre></code>
@@ -282,6 +282,16 @@ function example(obj) {
 			Reveal.addEventListener('fragmentshown', updateState);
 			Reveal.addEventListener('fragmenthidden', updateState);
 		</script>
-
+		<script src="js/example.js"></script>
+		<script>
+			example = (function(e) {
+				return function() {
+					var a = arguments;
+					setTimeout(function() {
+						e.apply(window, a);
+					}, 0);
+				}
+			})(example);
+		</script>
 	</body>
 </html>
