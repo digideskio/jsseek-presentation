@@ -57,13 +57,32 @@
 						<small>Daniel Connor - C00137906</small>
 					</p>
 					<p>
-						<small>IT Carlow - 25/01/2013</small>
+						<small>IT Carlow - 22/03/2013</small>
 					</p>
 				</section>
 
 				<section>
-					<h1>What?</h1>
-					<p>A javascript error generator that takes a function as input and creates test cases to show any errors that can be found</p>
+					<section>
+						<h1>What?</h1>
+						<p>A javascript error generator that takes a function as input and creates test cases to show any errors that can be found</p>
+					</section>
+
+					<section>
+						<h2>Uses</h2>
+						<ul>
+							<li>Integration into an IDE or text editor.</li>
+							<li class="fragment">As part of a test suite or build process.</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Similar tools</h2>
+						<ul>
+							<li class="fragment">Static analysers such as <img width="90px" style="vertical-align:middle" src="img/jshint-blue.png"></li>
+							<li class="fragment">Hand coded tests.</li>
+							<li class="fragment">Code coverage tools.</li>
+						</ul>
+					</section>
 				</section>
 
 				<section>
@@ -156,32 +175,6 @@ null == undefined
 					</section>
 
 					<section>
-						<h4>Constraint</h4>
-						<div id="constraint">none</div>
-						<pre><code>
-<span id="line1" class="fragment code-highlight">function example(a, b) {			</span>
-<span class="fragment code-highlight">	// some code 				</span>
-<span id="line2" class="fragment code-highlight">	if(a > 5 && b === a * a) {		</span>
-<span id="line3" class="fragment code-highlight">		a += 1;				</span>
-<span id="line4" class="fragment code-highlight">		if(a < 100) {			</span>
-<span id="line5" class="fragment code-highlight">			//do something		</span>
-		}
-		else {
-<span id="line6" class="fragment code-highlight">			// do something else 		</span>
-		}
-	}
-	if(b < 10000) {
-		// some code
-	}
-}
-<span id="invoke"></span></code></pre>
-					</section>
-
-					<section>
-						<img src="img/paths.png">
-					</section>
-
-					<section>
 						<h2>Symbolic Execution - Problems</h2>
 						<ul>
 							<li>Loops</li>
@@ -193,20 +186,23 @@ null == undefined
 				</section>
 
 				<section>
-					<h2>The Story so Far...</h2>
-					<ul>
-						<li>Binding from javascript to prolog</li>
-						<li>Symbolic execution involving just numbers</li>
-					</ul>
-				</section>
+					<section>
+						<h2>Example</h2>
+						<pre><code>
+function example(obj) {
+	if(obj != null) {
+		if(obj.prop == null) {
+			obj.prop = {};
+		}
+		obj.prop.a = 10;
+	}
+}
+						</pre></code>
+					</section>
 
-				<section>
-					<h2>// TODO: Lots...</h2>
-					<ul>
-						<li>Figure out a way of representing object constraints.</li>
-						<li>Expand the subset of javascript.</li>
-						<li>Create a usable tool.</li>
-					</ul>
+					<section>
+						<img style="background:none; border: none; box-shadow: none" src="img/paths.png">
+					</section>
 				</section>
 
 				<section>
